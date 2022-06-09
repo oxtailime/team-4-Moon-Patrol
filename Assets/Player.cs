@@ -4,7 +4,8 @@ public class Player : MonoBehaviour {
     public GameObject bulletPrefab;
     public Transform firePoint;
     public float moveSpeed = 5f;
-    
+    public int health = 600;
+    public GameObject deathEffect;
 
     // Start is called before the first frame update
      void Start()
@@ -40,6 +41,21 @@ public class Player : MonoBehaviour {
 
 
     }
+     public void TakeDamagePlayer (int bulletDamage)
+    {
+        health = health - bulletDamage;
+
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+    void Die()
+    {
+        Instantiate(deathEffect, transform.position, Quaternion.identity);
+        Destroy(gameObject);
+    }
+
 
     }
 

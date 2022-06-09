@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Bullet : MonoBehaviour {
+public class BulletEnemy : MonoBehaviour {
 
 public float bulletSpeed = 10f;
 public int bulletDamage = 40;
@@ -19,10 +19,10 @@ Rigidbody2D rb;
 
     private void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        Enemy enemy = hitInfo.GetComponent<Enemy>();
-        if (enemy != null)
+        Player player = hitInfo.GetComponent<Player>();
+        if (player != null)
         {
-            enemy.TakeDamage(bulletDamage);
+            player.TakeDamagePlayer(bulletDamage);
         }
         Destroy(gameObject);
     }
