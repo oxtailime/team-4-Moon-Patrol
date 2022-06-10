@@ -3,7 +3,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour {
 
 public float bulletSpeed = 10f;
-public float bulletDamage = 10f;
+public int bulletDamage = 40;
 
 Rigidbody2D rb;
 
@@ -14,6 +14,24 @@ Rigidbody2D rb;
         rb.AddForce(force, ForceMode2D.Impulse);
     }
     private void OnCollisionEnter2D(Collision2D collision) {
+        Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter2D(Collider2D hitInfo)
+    {
+        Enemy enemy = hitInfo.GetComponent<Enemy>();
+        if (enemy != null)
+        {
+            enemy.TakeDamage(bulletDamage);
+        }
+        Destroy(gameObject);
+    
+    
+        FlyerEnemy FlyerEnemy = hitInfo.GetComponent<FlyerEnemy>();
+        if (FlyerEnemy != null)
+        {
+            FlyerEnemy.TakeDamage(bulletDamage);
+        }
         Destroy(gameObject);
     }
 }
